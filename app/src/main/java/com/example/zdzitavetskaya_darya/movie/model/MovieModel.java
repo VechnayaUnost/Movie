@@ -1,97 +1,82 @@
-package com.example.zdzitavetskaya_darya.movie;
+package com.example.zdzitavetskaya_darya.movie.model;
 
 import java.util.List;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class MovieModel {
 
     @SerializedName("vote_count")
-    @Expose
-    private Integer voteCount;
+    private int voteCount;
 
     @SerializedName("id")
-    @Expose
-    private Integer id;
+    private int id;
 
     @SerializedName("video")
-    @Expose
-    private Boolean video;
+    private boolean video;
 
     @SerializedName("vote_average")
-    @Expose
-    private Float voteAverage;
+    private float voteAverage;
 
     @SerializedName("title")
-    @Expose
     private String title;
 
     @SerializedName("popularity")
-    @Expose
-    private Float popularity;
+    private float popularity;
 
     @SerializedName("poster_path")
-    @Expose
     private String posterPath;
 
     @SerializedName("original_language")
-    @Expose
     private String originalLanguage;
 
     @SerializedName("original_title")
-    @Expose
     private String originalTitle;
 
     @SerializedName("genre_ids")
-    @Expose
     private List<Integer> genreIds = null;
 
     @SerializedName("backdrop_path")
-    @Expose
     private String backdropPath;
 
     @SerializedName("adult")
-    @Expose
-    private Boolean adult;
+    private boolean adult;
 
     @SerializedName("overview")
-    @Expose
     private String overview;
 
     @SerializedName("release_date")
-    @Expose
     private String releaseDate;
 
-    public Integer getVoteCount() {
+    public int getVoteCount() {
         return voteCount;
     }
 
-    public void setVoteCount(Integer voteCount) {
+    public void setVoteCount(int voteCount) {
         this.voteCount = voteCount;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Boolean getVideo() {
+    public boolean getVideo() {
         return video;
     }
 
-    public void setVideo(Boolean video) {
+    public void setVideo(boolean video) {
         this.video = video;
     }
 
-    public Float getVoteAverage() {
+    public float getVoteAverage() {
         return voteAverage;
     }
 
-    public void setVoteAverage(Float voteAverage) {
+    public void setVoteAverage(float voteAverage) {
         this.voteAverage = voteAverage;
     }
 
@@ -103,11 +88,11 @@ public class MovieModel {
         this.title = title;
     }
 
-    public Float getPopularity() {
+    public float getPopularity() {
         return popularity;
     }
 
-    public void setPopularity(Float popularity) {
+    public void setPopularity(float popularity) {
         this.popularity = popularity;
     }
 
@@ -151,11 +136,11 @@ public class MovieModel {
         this.backdropPath = backdropPath;
     }
 
-    public Boolean getAdult() {
+    public boolean getAdult() {
         return adult;
     }
 
-    public void setAdult(Boolean adult) {
+    public void setAdult(boolean adult) {
         this.adult = adult;
     }
 

@@ -1,4 +1,6 @@
-package com.example.zdzitavetskaya_darya.movie;
+package com.example.zdzitavetskaya_darya.movie.api;
+
+import com.example.zdzitavetskaya_darya.movie.model.MovieCover;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

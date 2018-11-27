@@ -1,4 +1,4 @@
-package com.example.zdzitavetskaya_darya.movie;
+package com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.zdzitavetskaya_darya.movie.R;
+import com.example.zdzitavetskaya_darya.movie.api.MovieApi;
+import com.example.zdzitavetskaya_darya.movie.api.RetrofitClient;
+import com.example.zdzitavetskaya_darya.movie.constants.Constants;
+import com.example.zdzitavetskaya_darya.movie.model.MovieCover;
+import com.example.zdzitavetskaya_darya.movie.model.MovieModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MovieFragment extends Fragment {
 
-    private static final String API_KEY = "610d8e1fb4a78ec4e822e33c9f62b96e";
-    private static final String BASE_URL = "https://api.themoviedb.org/3/";
-
-    private static Retrofit retrofit = null;
+    //private static Retrofit retrofit = null;
 
     @BindView(R.id.movies_recycler_view)
     RecyclerView recyclerView;
@@ -61,7 +65,7 @@ public class MovieFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        movieApi = getClient().create(MovieApi.class);
+        movieApi = RetrofitClient.getRetrofitInstance().create(MovieApi.class);
 
         movies = new ArrayList<>();
 
@@ -71,7 +75,7 @@ public class MovieFragment extends Fragment {
         MoviesAdapter adapter = new MoviesAdapter(movies);
         recyclerView.setAdapter(adapter);
 
-        Observable<MovieCover> observable = getMovieApi().getTrends(API_KEY);
+        Observable<MovieCover> observable = getMovieApi().getTrends(Constants.API_KEY);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MovieCover>() {
@@ -82,7 +86,7 @@ public class MovieFragment extends Fragment {
 
                     @Override
                     public void onNext(MovieCover movieCover) {
-                        movies.addAll(movieCover.movies);
+                        movies.addAll(movieCover.getMovies());
                         Objects.requireNonNull(recyclerView.getAdapter()).notifyDataSetChanged();
                     }
 
@@ -102,14 +106,14 @@ public class MovieFragment extends Fragment {
         return movieApi;
     }
 
-    public static Retrofit getClient() {
+    /*public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .baseUrl(BASE_URL)
+                    .baseUrl(Constants.BASE_URL)
                     .build();
         }
         return retrofit;
-    }
+    }*/
 }

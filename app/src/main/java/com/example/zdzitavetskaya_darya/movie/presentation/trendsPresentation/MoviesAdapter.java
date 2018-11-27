@@ -1,27 +1,27 @@
-package com.example.zdzitavetskaya_darya.movie;
+package com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation;
 
-import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.example.zdzitavetskaya_darya.movie.module.GlideApp;
+import com.example.zdzitavetskaya_darya.movie.R;
+import com.example.zdzitavetskaya_darya.movie.constants.Constants;
+import com.example.zdzitavetskaya_darya.movie.extensions.Utility;
+import com.example.zdzitavetskaya_darya.movie.model.MovieModel;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
-    private List<MovieModel> movies;
 
-    private static final String BASE_POSTER_URL = "https://image.tmdb.org/t/p/original/";
+    private List<MovieModel> movies;
 
     MoviesAdapter(List<MovieModel> movies) {
         this.movies = movies;
@@ -31,6 +31,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
+
         return new ViewHolder(v);
     }
 
@@ -42,10 +43,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         String posterPath = movie.getPosterPath();
         GlideApp.with(holder.moviePoster.getContext())
-                .load(BASE_POSTER_URL + posterPath)
+                .load(Constants.BASE_POSTER_URL + posterPath)
                 .into(holder.moviePoster);
 
-        holder.releaseDate.setText(getFormatDate(movie.getReleaseDate()));
+        holder.releaseDate.setText(Utility.getFormatDate(movie.getReleaseDate()));
 
         holder.overview.setText(movie.getOverview());
     }
@@ -55,20 +56,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         if (movies == null)
             return 0;
         return movies.size();
-    }
-
-    private String getFormatDate(String date) {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        if (date != null) {
-            try {
-                Date newDate = dateFormat.parse(date);
-                return DateFormat.format("d MMMM y", newDate).toString();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return date;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -86,6 +73,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         ViewHolder(View itemView) {
             super(itemView);
+
             ButterKnife.bind(this, itemView);
         }
     }

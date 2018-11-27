@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.MovieFragment;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
