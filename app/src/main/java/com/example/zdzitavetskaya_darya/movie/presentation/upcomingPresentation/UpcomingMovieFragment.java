@@ -1,4 +1,4 @@
-package com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation;
+package com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation;
 
 import android.support.v7.widget.RecyclerView;
 
@@ -7,17 +7,17 @@ import com.example.zdzitavetskaya_darya.movie.R;
 import com.example.zdzitavetskaya_darya.movie.model.MovieModel;
 import com.example.zdzitavetskaya_darya.movie.presentation.BaseFragment;
 import com.example.zdzitavetskaya_darya.movie.presentation.MoviesAdapter;
-import com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.presenter.TrendsPresenter;
-import com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.presenter.TrendsView;
+import com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation.presenter.UpcomingPresenter;
+import com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation.presenter.UpcomingView;
 
 import java.util.List;
 
 import butterknife.BindView;
 
-public class MovieFragment extends BaseFragment implements TrendsView {
+public class UpcomingMovieFragment extends BaseFragment implements UpcomingView {
 
     @InjectPresenter
-    TrendsPresenter mTrendsPresenter;
+    UpcomingPresenter upcomingPresenter;
 
     @BindView(R.id.movies_recycler_view)
     RecyclerView recyclerView;

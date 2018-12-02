@@ -1,35 +1,29 @@
 package com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.model;
 
-import android.util.Log;
-
-import com.example.zdzitavetskaya_darya.movie.api.MovieApi;
-import com.example.zdzitavetskaya_darya.movie.api.RetrofitClient;
+import com.example.zdzitavetskaya_darya.movie.App;
 import com.example.zdzitavetskaya_darya.movie.constants.Constants;
 import com.example.zdzitavetskaya_darya.movie.model.MovieCover;
 import com.example.zdzitavetskaya_darya.movie.presentation.BaseMVPModel;
-import com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.presenter.MoviesPresenter;
+import com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.presenter.TrendsPresenter;
 
-import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class MoviewModel extends BaseMVPModel {
+public class TrendsModel extends BaseMVPModel {
 
-    MoviewModelCallback callback;
+    private TrendsModelCallback callback;
 
-    public MoviewModel(MoviesPresenter presenter) {
+    public TrendsModel(TrendsPresenter presenter) {
         this.callback = presenter;
         getFilmsFromNetwork();
-        Log.e("AA","TEST");
     }
 
-    void getFilmsFromNetwork() {
-        MovieApi movieApi = RetrofitClient.getRetrofitInstance().create(MovieApi.class);
-
-        movieApi.getTrends(Constants.API_KEY).subscribeOn(Schedulers.io())
+    private void getFilmsFromNetwork() {
+        App.getMovieApi().getTrends(Constants.API_KEY).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<MovieCover>() {
+                .subscribe(new SingleObserver<MovieCover>() {
 
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -37,18 +31,13 @@ public class MoviewModel extends BaseMVPModel {
                     }
 
                     @Override
-                    public void onNext(MovieCover movieCover) {
+                    public void onSuccess(MovieCover movieCover) {
                         callback.onFilmsSuccess(movieCover.getMovies());
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                    }
-
-                    @Override
-                    public void onComplete() {
-
                     }
                 });
     }

@@ -1,4 +1,4 @@
-package com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation;
+package com.example.zdzitavetskaya_darya.movie.presentation;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +23,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     private List<MovieModel> movies;
 
-    MoviesAdapter(List<MovieModel> movies) {
+    public List<MovieModel> getMovies() {
+        return movies;
+    }
+
+    public MoviesAdapter(List<MovieModel> movies) {
         this.movies = movies;
     }
 

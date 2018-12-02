@@ -6,4 +6,8 @@ public class Constants {
     public static final String BASE_URL = "https://api.themoviedb.org/3/";
 
     public static final String BASE_POSTER_URL = "https://image.tmdb.org/t/p/original/";
+
+    public static final String TRENDS_SCREEN = "trends";
+
+    public static final String UPCOMING_SCREEN = "upcoming";
 }

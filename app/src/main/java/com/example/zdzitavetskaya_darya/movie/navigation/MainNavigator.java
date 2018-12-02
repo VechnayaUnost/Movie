@@ -1,24 +1,28 @@
 package com.example.zdzitavetskaya_darya.movie.navigation;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 
 import com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.MovieFragment;
+import com.example.zdzitavetskaya_darya.movie.constants.Constants;
+import com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation.UpcomingMovieFragment;
 
 public class MainNavigator {
 
-    FragmentManager fragmentManager;
-    int resid;
+    private FragmentManager fragmentManager;
+    private int resId;
 
-    public MainNavigator(FragmentManager fragmentManager, int resid){
+    public MainNavigator(FragmentManager fragmentManager, int resId){
         this.fragmentManager = fragmentManager;
-        this.resid = resid;
+        this.resId = resId;
     }
 
-    public void firstTabNavigatin(String screenName){
-        //swith for screen name
-             fragmentManager.beginTransaction().replace(resid,new MovieFragment()).commit();
-
+    public void bottomNavigation(String screenName){
+        //switch for screen name
+             switch (screenName) {
+                 case Constants.TRENDS_SCREEN: fragmentManager.beginTransaction().replace(resId, new MovieFragment()).commit();
+                            break;
+                 case Constants.UPCOMING_SCREEN: fragmentManager.beginTransaction().replace(resId, new UpcomingMovieFragment()).commit();
+                            break;
+             }
     }
 }
