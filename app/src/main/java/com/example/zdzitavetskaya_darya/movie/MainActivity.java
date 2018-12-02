@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.example.zdzitavetskaya_darya.movie.constants.Constants;
+import com.example.zdzitavetskaya_darya.movie.constants.ScreenConstants;
 import com.example.zdzitavetskaya_darya.movie.navigation.MainNavigator;
 
 import butterknife.BindView;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             navigator = new MainNavigator(getSupportFragmentManager(), R.id.main_container_frame_layout);
-            navigator.bottomNavigation(Constants.TRENDS_SCREEN);
+            navigator.bottomNavigation(ScreenConstants.TRENDS_SCREEN);
         }
 
         setContentView(R.layout.activity_main);
@@ -35,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.navigation_trends:
-                    navigator.bottomNavigation(Constants.TRENDS_SCREEN);
+                    navigator.bottomNavigation(ScreenConstants.TRENDS_SCREEN);
                     return true;
                 case R.id.navigation_upcoming:
-                    navigator.bottomNavigation(Constants.UPCOMING_SCREEN);
+                    navigator.bottomNavigation(ScreenConstants.UPCOMING_SCREEN);
                     return true;
                 case R.id.navigation_favourites:
                     mTextMessage.setText(R.string.title_favourites);

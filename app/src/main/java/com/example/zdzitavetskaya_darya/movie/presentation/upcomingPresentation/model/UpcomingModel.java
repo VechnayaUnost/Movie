@@ -4,6 +4,7 @@ import com.example.zdzitavetskaya_darya.movie.App;
 import com.example.zdzitavetskaya_darya.movie.constants.Constants;
 import com.example.zdzitavetskaya_darya.movie.model.MovieCover;
 import com.example.zdzitavetskaya_darya.movie.presentation.BaseMVPModel;
+import com.example.zdzitavetskaya_darya.movie.presentation.MoviesModelCallback;
 import com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation.presenter.UpcomingPresenter;
 
 import io.reactivex.SingleObserver;
@@ -13,7 +14,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class UpcomingModel extends BaseMVPModel{
 
-    private UpcomingModelCallback callback;
+    private MoviesModelCallback callback;
 
     public UpcomingModel(UpcomingPresenter presenter) {
         this.callback = presenter;

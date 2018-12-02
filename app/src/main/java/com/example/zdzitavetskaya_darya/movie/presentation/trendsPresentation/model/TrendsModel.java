@@ -4,6 +4,7 @@ import com.example.zdzitavetskaya_darya.movie.App;
 import com.example.zdzitavetskaya_darya.movie.constants.Constants;
 import com.example.zdzitavetskaya_darya.movie.model.MovieCover;
 import com.example.zdzitavetskaya_darya.movie.presentation.BaseMVPModel;
+import com.example.zdzitavetskaya_darya.movie.presentation.MoviesModelCallback;
 import com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.presenter.TrendsPresenter;
 
 import io.reactivex.SingleObserver;
@@ -13,7 +14,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class TrendsModel extends BaseMVPModel {
 
-    private TrendsModelCallback callback;
+    private MoviesModelCallback callback;
 
     public TrendsModel(TrendsPresenter presenter) {
         this.callback = presenter;

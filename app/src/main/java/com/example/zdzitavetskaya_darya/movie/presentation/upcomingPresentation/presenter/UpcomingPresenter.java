@@ -3,13 +3,13 @@ package com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.zdzitavetskaya_darya.movie.model.MovieModel;
+import com.example.zdzitavetskaya_darya.movie.presentation.MoviesModelCallback;
 import com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation.model.UpcomingModel;
-import com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation.model.UpcomingModelCallback;
 
 import java.util.List;
 
 @InjectViewState
-public class UpcomingPresenter extends MvpPresenter<UpcomingView> implements UpcomingModelCallback{
+public class UpcomingPresenter extends MvpPresenter<UpcomingView> implements MoviesModelCallback{
 
     private UpcomingModel upcomingModel;
 

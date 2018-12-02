@@ -1,14 +1,19 @@
 package com.example.zdzitavetskaya_darya.movie.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
+@Entity
 public class MovieModel {
 
     @SerializedName("vote_count")
     private int voteCount;
 
+    @PrimaryKey
     @SerializedName("id")
     private int id;
 
