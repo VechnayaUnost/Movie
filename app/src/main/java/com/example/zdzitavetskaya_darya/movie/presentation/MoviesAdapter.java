@@ -33,14 +33,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
 
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         MovieModel movie = movies.get(position);
 
         holder.title.setText(movie.getTitle());

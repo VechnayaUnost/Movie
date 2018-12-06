@@ -23,19 +23,19 @@ public abstract class BaseFragment extends MvpAppCompatFragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutFragment(), container, false);
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
+        final View view = inflater.inflate(getLayoutFragment(), container, false);
         ButterKnife.bind(this, view);
         return view;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         getRecycler().setLayoutManager(layoutManager);
 
-        MoviesAdapter adapter = new MoviesAdapter(new ArrayList<>());
+        final MoviesAdapter adapter = new MoviesAdapter(new ArrayList<>());
         getRecycler().setAdapter(adapter);
     }
 }

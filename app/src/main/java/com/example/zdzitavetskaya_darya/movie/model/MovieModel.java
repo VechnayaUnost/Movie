@@ -3,8 +3,6 @@ package com.example.zdzitavetskaya_darya.movie.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.util.List;
-
 import com.google.gson.annotations.SerializedName;
 
 @Entity
@@ -38,9 +36,6 @@ public class MovieModel {
     @SerializedName("original_title")
     private String originalTitle;
 
-    @SerializedName("genre_ids")
-    private List<Integer> genreIds = null;
-
     @SerializedName("backdrop_path")
     private String backdropPath;
 
@@ -52,6 +47,12 @@ public class MovieModel {
 
     @SerializedName("release_date")
     private String releaseDate;
+
+    private boolean isTrending;
+
+    private boolean isUpcoming;
+
+    private boolean isFavourite;
 
     public int getVoteCount() {
         return voteCount;
@@ -125,14 +126,6 @@ public class MovieModel {
         this.originalTitle = originalTitle;
     }
 
-    public List<Integer> getGenreIds() {
-        return genreIds;
-    }
-
-    public void setGenreIds(List<Integer> genreIds) {
-        this.genreIds = genreIds;
-    }
-
     public String getBackdropPath() {
         return backdropPath;
     }
@@ -163,5 +156,29 @@ public class MovieModel {
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public boolean isTrending() {
+        return isTrending;
+    }
+
+    public void setTrending(boolean trending) {
+        isTrending = trending;
+    }
+
+    public boolean isUpcoming() {
+        return isUpcoming;
+    }
+
+    public void setUpcoming(boolean upcoming) {
+        isUpcoming = upcoming;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
     }
 }

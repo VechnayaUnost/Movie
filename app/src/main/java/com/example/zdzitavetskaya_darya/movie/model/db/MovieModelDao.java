@@ -9,11 +9,22 @@ import com.example.zdzitavetskaya_darya.movie.model.MovieModel;
 
 import java.util.List;
 
+import io.reactivex.Single;
+
 @Dao
 public interface MovieModelDao {
 
-    @Query("SELECT * FROM moviemodel")
-    List<MovieModel> getFavourite();
+    @Query("SELECT * FROM moviemodel WHERE isTrending = :isTrending")
+    Single<List<MovieModel>> getTrendingMovies(boolean isTrending);
+
+    @Query("SELECT * FROM moviemodel WHERE isUpcoming = :isUpcoming")
+    Single<List<MovieModel>> getUpcomingMovies(boolean isUpcoming);
+
+    @Query("SELECT * FROM moviemodel WHERE isFavourite = :isFavourite")
+    Single<List<MovieModel>> getFavouriteMovies(boolean isFavourite);
+
+    @Query("DELETE FROM moviemodel WHERE isTrending = :isTrending")
+    void deleteAllTrending(boolean isTrending);
 
     @Insert
     void insert(MovieModel movie);
@@ -22,5 +33,5 @@ public interface MovieModelDao {
     void delete(MovieModel movie);
 
     @Insert
-    void insertAll(MovieModel... movie);
+    void insertAll(List<MovieModel> movie);
 }

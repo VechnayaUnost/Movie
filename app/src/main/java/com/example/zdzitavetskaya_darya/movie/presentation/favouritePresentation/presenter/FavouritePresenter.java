@@ -1,13 +1,12 @@
-package com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation.presenter;
-
-import android.util.Log;
+package com.example.zdzitavetskaya_darya.movie.presentation.favouritePresentation.presenter;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.zdzitavetskaya_darya.movie.App;
 import com.example.zdzitavetskaya_darya.movie.model.MovieModel;
 import com.example.zdzitavetskaya_darya.movie.presentation.MoviesModelCallback;
-import com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation.model.UpcomingModel;
+import com.example.zdzitavetskaya_darya.movie.presentation.favouritePresentation.model.FavouriteModel;
+import com.example.zdzitavetskaya_darya.movie.presentation.favouritePresentation.model.FavouriteModelCallback;
 
 import java.util.List;
 
@@ -17,19 +16,24 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 @InjectViewState
-public class UpcomingPresenter extends MvpPresenter<UpcomingView> implements MoviesModelCallback{
+public class FavouritePresenter extends MvpPresenter<FavouriteView> implements MoviesModelCallback, FavouriteModelCallback {
 
-    private UpcomingModel upcomingModel;
+    private FavouriteModel favouriteModel;
 
-    public UpcomingPresenter() {
-        upcomingModel = new UpcomingModel(this);
+    public FavouritePresenter() {
+        favouriteModel = new FavouriteModel(this);
     }
 
     @Override
     public void onFilmsSuccess(List<MovieModel> movies) {
         getViewState().onFilmsSuccess(movies);
+    }
 
-        Completable.fromAction(() -> App.getMovieDatabase().movieModelDao().insertAll(movies))
+    @Override
+    public void onFilmSuccess(MovieModel movie) {
+        getViewState().onFilmSuccess(movie);
+
+        Completable.fromAction(() -> App.getMovieDatabase().movieModelDao().insert(movie))
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new CompletableObserver() {
@@ -40,20 +44,19 @@ public class UpcomingPresenter extends MvpPresenter<UpcomingView> implements Mov
 
                     @Override
                     public void onComplete() {
-                        Log.i("AAA", "suc");
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.i("AAA", "err");
-                        e.printStackTrace();
+
                     }
                 });
     }
 
     @Override
     public void onDestroy() {
-        upcomingModel.onDestroyPresenter();
+        favouriteModel.onDestroyPresenter();
         super.onDestroy();
     }
 }

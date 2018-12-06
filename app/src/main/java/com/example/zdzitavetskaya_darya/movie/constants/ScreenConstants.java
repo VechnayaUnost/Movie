@@ -4,4 +4,6 @@ public class ScreenConstants {
     public static final String TRENDS_SCREEN = "trends";
 
     public static final String UPCOMING_SCREEN = "upcoming";
+
+    public static final String FAVOURITE_SCREEN = "favourite";
 }
