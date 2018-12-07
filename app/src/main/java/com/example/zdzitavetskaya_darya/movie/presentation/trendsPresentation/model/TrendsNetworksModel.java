@@ -3,7 +3,9 @@ package com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.m
 import com.example.zdzitavetskaya_darya.movie.App;
 import com.example.zdzitavetskaya_darya.movie.constants.Constants;
 import com.example.zdzitavetskaya_darya.movie.model.MovieCover;
+import com.example.zdzitavetskaya_darya.movie.model.MovieModel;
 import com.example.zdzitavetskaya_darya.movie.presentation.BaseMVPModel;
+import com.example.zdzitavetskaya_darya.movie.presentation.MoviesModelCallback;
 import com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.presenter.TrendsPresenter;
 
 import io.reactivex.SingleObserver;
@@ -11,11 +13,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class TrendsModel extends BaseMVPModel {
+public final class TrendsNetworksModel extends BaseMVPModel {
 
-    private TrendsModelCallback callback;
+    private final MoviesModelCallback callback;
 
-    public TrendsModel(TrendsPresenter presenter) {
+    public TrendsNetworksModel(final TrendsPresenter presenter) {
         this.callback = presenter;
         getFilmsFromNetwork();
     }
@@ -24,7 +26,6 @@ public class TrendsModel extends BaseMVPModel {
         App.getMovieApi().getTrends(Constants.API_KEY).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<MovieCover>() {
-
                     @Override
                     public void onSubscribe(Disposable d) {
                         compositeDisposable.add(d);
@@ -32,11 +33,15 @@ public class TrendsModel extends BaseMVPModel {
 
                     @Override
                     public void onSuccess(MovieCover movieCover) {
+                        for (MovieModel movie: movieCover.getMovies()) {
+                            movie.setTrending(true);
+                        }
                         callback.onFilmsSuccess(movieCover.getMovies());
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        callback.onFilmsError();
                         e.printStackTrace();
                     }
                 });

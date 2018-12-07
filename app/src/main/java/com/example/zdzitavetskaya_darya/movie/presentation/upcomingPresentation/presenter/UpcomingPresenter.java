@@ -3,28 +3,38 @@ package com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.zdzitavetskaya_darya.movie.model.MovieModel;
-import com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation.model.UpcomingModel;
-import com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation.model.UpcomingModelCallback;
+import com.example.zdzitavetskaya_darya.movie.presentation.MoviesModelCallback;
+import com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation.model.UpcomingDatabaseModel;
+import com.example.zdzitavetskaya_darya.movie.presentation.upcomingPresentation.model.UpcomingNetworkModel;
 
 import java.util.List;
 
 @InjectViewState
-public class UpcomingPresenter extends MvpPresenter<UpcomingView> implements UpcomingModelCallback{
+public class UpcomingPresenter extends MvpPresenter<UpcomingView> implements MoviesModelCallback{
 
-    private UpcomingModel upcomingModel;
+    private UpcomingDatabaseModel upcomingDatabaseModel;
+    private UpcomingNetworkModel upcomingNetworkModel;
 
     public UpcomingPresenter() {
-        upcomingModel = new UpcomingModel(this);
+        upcomingNetworkModel = new UpcomingNetworkModel(this);
     }
 
     @Override
     public void onFilmsSuccess(List<MovieModel> movies) {
         getViewState().onFilmsSuccess(movies);
+
+        upcomingDatabaseModel = new UpcomingDatabaseModel(this, movies);
+    }
+
+    @Override
+    public void onFilmsError() {
+        upcomingDatabaseModel = new UpcomingDatabaseModel(this);
     }
 
     @Override
     public void onDestroy() {
-        upcomingModel.onDestroyPresenter();
+        upcomingNetworkModel.onDestroyPresenter();
+        upcomingDatabaseModel.onDestroyPresenter();
         super.onDestroy();
     }
 }
