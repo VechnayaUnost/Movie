@@ -7,4 +7,6 @@ import java.util.List;
 public interface MoviesModelCallback {
 
     void onFilmsSuccess(List<MovieModel> movies);
+
+    void onFilmsError();
 }

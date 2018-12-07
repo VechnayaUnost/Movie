@@ -8,18 +8,16 @@ import com.example.zdzitavetskaya_darya.movie.presentation.BaseMVPModel;
 import com.example.zdzitavetskaya_darya.movie.presentation.MoviesModelCallback;
 import com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.presenter.TrendsPresenter;
 
-import java.util.List;
-
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public final class TrendsModel extends BaseMVPModel {
+public final class TrendsNetworksModel extends BaseMVPModel {
 
     private final MoviesModelCallback callback;
 
-    public TrendsModel(final TrendsPresenter presenter) {
+    public TrendsNetworksModel(final TrendsPresenter presenter) {
         this.callback = presenter;
         getFilmsFromNetwork();
     }
@@ -43,29 +41,7 @@ public final class TrendsModel extends BaseMVPModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        getMoviesFromDatabase();
-                        e.printStackTrace();
-                    }
-                });
-    }
-
-    private void getMoviesFromDatabase() {
-        App.getMovieDatabase().movieModelDao().getTrendingMovies(true)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<List<MovieModel>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        compositeDisposable.add(d);
-                    }
-
-                    @Override
-                    public void onSuccess(List<MovieModel> movieModels) {
-                        callback.onFilmsSuccess(movieModels);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
+                        callback.onFilmsError();
                         e.printStackTrace();
                     }
                 });

@@ -1,10 +1,11 @@
-package com.example.zdzitavetskaya_darya.movie.presentation.favouritePresentation.model;
+package com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.model;
 
 import com.example.zdzitavetskaya_darya.movie.App;
+import com.example.zdzitavetskaya_darya.movie.extensions.Utility;
 import com.example.zdzitavetskaya_darya.movie.model.MovieModel;
 import com.example.zdzitavetskaya_darya.movie.presentation.BaseMVPModel;
 import com.example.zdzitavetskaya_darya.movie.presentation.MoviesModelCallback;
-import com.example.zdzitavetskaya_darya.movie.presentation.favouritePresentation.presenter.FavouritePresenter;
+import com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.presenter.TrendsPresenter;
 
 import java.util.List;
 
@@ -15,17 +16,22 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public final class FavouriteModel extends BaseMVPModel {
+public final class TrendsDatabaseModel extends BaseMVPModel {
 
     private final MoviesModelCallback callback;
 
-    public FavouriteModel(final FavouritePresenter presenter) {
+    public TrendsDatabaseModel(final TrendsPresenter presenter) {
         this.callback = presenter;
         getMoviesFromDatabase();
     }
 
+    public TrendsDatabaseModel(final TrendsPresenter presenter, List<MovieModel> movies) {
+        this.callback = presenter;
+        insertMoviesInDatabase(movies);
+    }
+
     private void getMoviesFromDatabase() {
-        App.getMovieDatabase().movieModelDao().getFavouriteMovies(true)
+        App.getMovieDatabase().movieModelDao().getTrendingMovies(true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<List<MovieModel>>() {
@@ -46,8 +52,8 @@ public final class FavouriteModel extends BaseMVPModel {
                 });
     }
 
-    private void insertMovieInDatabase(MovieModel movie) {
-        Completable.fromAction(() -> App.getMovieDatabase().movieModelDao().insert(movie))
+    private void insertMoviesInDatabase(List<MovieModel> movies) {
+        Completable.fromAction(() -> App.getMovieDatabase().movieModelDao().insertAll(Utility.convertListToArray(movies)))
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new CompletableObserver() {
@@ -63,7 +69,7 @@ public final class FavouriteModel extends BaseMVPModel {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        e.printStackTrace();
                     }
                 });
     }

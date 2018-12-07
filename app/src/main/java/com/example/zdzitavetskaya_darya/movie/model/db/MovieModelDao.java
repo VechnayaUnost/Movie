@@ -3,6 +3,7 @@ package com.example.zdzitavetskaya_darya.movie.model.db;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.example.zdzitavetskaya_darya.movie.model.MovieModel;
@@ -32,6 +33,6 @@ public interface MovieModelDao {
     @Delete
     void delete(MovieModel movie);
 
-    @Insert
-    void insertAll(List<MovieModel> movie);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(MovieModel... movieModels);
 }

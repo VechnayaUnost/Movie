@@ -27,7 +27,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         return movies;
     }
 
-    public MoviesAdapter(List<MovieModel> movies) {
+    MoviesAdapter(List<MovieModel> movies) {
         this.movies = movies;
     }
 
@@ -45,9 +45,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         holder.title.setText(movie.getTitle());
 
-        String posterPath = movie.getPosterPath();
         GlideApp.with(holder.moviePoster.getContext())
-                .load(Constants.BASE_POSTER_URL + posterPath)
+                .load(Constants.BASE_POSTER_URL + movie.getPosterPath())
                 .into(holder.moviePoster);
 
         holder.releaseDate.setText(Utility.getFormatDate(movie.getReleaseDate()));
