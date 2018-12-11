@@ -30,29 +30,29 @@ public final class FavouriteModel extends BaseMVPModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<List<MovieModel>>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(final Disposable d) {
                         compositeDisposable.add(d);
                     }
 
                     @Override
-                    public void onSuccess(List<MovieModel> movieModels) {
+                    public void onSuccess(final List<MovieModel> movieModels) {
                         callback.onFilmsSuccess(movieModels);
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(final Throwable e) {
                         e.printStackTrace();
                     }
                 });
     }
 
-    private void insertMovieInDatabase(MovieModel movie) {
+    private void insertMovieInDatabase(final MovieModel movie) {
         Completable.fromAction(() -> App.getMovieDatabase().movieModelDao().insert(movie))
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new CompletableObserver() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(final Disposable d) {
 
                     }
 
@@ -62,7 +62,7 @@ public final class FavouriteModel extends BaseMVPModel {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(final Throwable e) {
 
                     }
                 });

@@ -29,29 +29,29 @@ public final class TrendsDatabaseModel extends BaseMVPModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<List<MovieModel>>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(final Disposable d) {
                         compositeDisposable.add(d);
                     }
 
                     @Override
-                    public void onSuccess(List<MovieModel> movieModels) {
+                    public void onSuccess(final List<MovieModel> movieModels) {
                         callback.onFilmsSuccess(movieModels);
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(final Throwable e) {
                         e.printStackTrace();
                     }
                 });
     }
 
-    public void insertMoviesInDatabase(List<MovieModel> movies) {
+    public void insertMoviesInDatabase(final List<MovieModel> movies) {
         Completable.fromAction(() -> App.getMovieDatabase().movieModelDao().insertAll(movies))
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new CompletableObserver() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(final Disposable d) {
 
                     }
 
@@ -61,7 +61,7 @@ public final class TrendsDatabaseModel extends BaseMVPModel {
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(final Throwable e) {
                         e.printStackTrace();
                     }
                 });

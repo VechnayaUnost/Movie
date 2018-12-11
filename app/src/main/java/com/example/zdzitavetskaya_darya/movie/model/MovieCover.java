@@ -21,7 +21,7 @@ public class MovieCover {
         return movies;
     }
 
-    public void setMovies(List<MovieModel> movies) {
+    public void setMovies(final List<MovieModel> movies) {
         this.movies = movies;
     }
 
@@ -29,7 +29,7 @@ public class MovieCover {
         return page;
     }
 
-    public void setPage(int page) {
+    public void setPage(final int page) {
         this.page = page;
     }
 
@@ -37,7 +37,7 @@ public class MovieCover {
         return totalResults;
     }
 
-    public void setTotalResults(int totalResults) {
+    public void setTotalResults(final int totalResults) {
         this.totalResults = totalResults;
     }
 
@@ -45,7 +45,7 @@ public class MovieCover {
         return totalPages;
     }
 
-    public void setTotalPages(int totalPages) {
+    public void setTotalPages(final int totalPages) {
         this.totalPages = totalPages;
     }
 }

@@ -33,13 +33,13 @@ public class FavouriteFragment extends BaseFragment implements FavouriteView{
     }
 
     @Override
-    public void onFilmsSuccess(List<MovieModel> movies) {
+    public void onFilmsSuccess(final List<MovieModel> movies) {
         ((MoviesAdapter) recyclerView.getAdapter()).getMovies().addAll(movies);
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
     @Override
-    public void onFilmSuccess(MovieModel movie) {
+    public void onFilmSuccess(final MovieModel movie) {
 
     }
 }

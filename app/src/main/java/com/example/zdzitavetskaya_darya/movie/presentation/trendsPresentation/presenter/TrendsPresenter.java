@@ -12,8 +12,8 @@ import java.util.List;
 @InjectViewState
 public class TrendsPresenter extends MvpPresenter<TrendsView> implements MoviesModelCallback {
 
-    private TrendsNetworksModel trendsNetworksModel;
-    private TrendsDatabaseModel trendsDatabaseModel;
+    private final TrendsNetworksModel trendsNetworksModel;
+    private final TrendsDatabaseModel trendsDatabaseModel;
 
     public TrendsPresenter() {
         trendsNetworksModel = new TrendsNetworksModel(this);

@@ -12,8 +12,8 @@ import java.util.List;
 @InjectViewState
 public class UpcomingPresenter extends MvpPresenter<UpcomingView> implements MoviesModelCallback{
 
-    private UpcomingDatabaseModel upcomingDatabaseModel;
-    private UpcomingNetworkModel upcomingNetworkModel;
+    private final UpcomingDatabaseModel upcomingDatabaseModel;
+    private final UpcomingNetworkModel upcomingNetworkModel;
 
     public UpcomingPresenter() {
         upcomingNetworkModel = new UpcomingNetworkModel(this);
