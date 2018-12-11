@@ -1,7 +1,6 @@
 package com.example.zdzitavetskaya_darya.movie.presentation.trendsPresentation.model;
 
 import com.example.zdzitavetskaya_darya.movie.App;
-import com.example.zdzitavetskaya_darya.movie.extensions.Utility;
 import com.example.zdzitavetskaya_darya.movie.model.MovieModel;
 import com.example.zdzitavetskaya_darya.movie.presentation.BaseMVPModel;
 import com.example.zdzitavetskaya_darya.movie.presentation.MoviesModelCallback;
@@ -22,15 +21,9 @@ public final class TrendsDatabaseModel extends BaseMVPModel {
 
     public TrendsDatabaseModel(final TrendsPresenter presenter) {
         this.callback = presenter;
-        getMoviesFromDatabase();
     }
 
-    public TrendsDatabaseModel(final TrendsPresenter presenter, List<MovieModel> movies) {
-        this.callback = presenter;
-        insertMoviesInDatabase(movies);
-    }
-
-    private void getMoviesFromDatabase() {
+    public void getMoviesFromDatabase() {
         App.getMovieDatabase().movieModelDao().getTrendingMovies(true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -52,8 +45,8 @@ public final class TrendsDatabaseModel extends BaseMVPModel {
                 });
     }
 
-    private void insertMoviesInDatabase(List<MovieModel> movies) {
-        Completable.fromAction(() -> App.getMovieDatabase().movieModelDao().insertAll(Utility.convertListToArray(movies)))
+    public void insertMoviesInDatabase(List<MovieModel> movies) {
+        Completable.fromAction(() -> App.getMovieDatabase().movieModelDao().insertAll(movies))
                 .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new CompletableObserver() {

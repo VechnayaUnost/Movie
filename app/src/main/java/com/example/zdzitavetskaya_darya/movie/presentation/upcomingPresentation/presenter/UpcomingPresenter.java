@@ -17,18 +17,18 @@ public class UpcomingPresenter extends MvpPresenter<UpcomingView> implements Mov
 
     public UpcomingPresenter() {
         upcomingNetworkModel = new UpcomingNetworkModel(this);
+        upcomingDatabaseModel = new UpcomingDatabaseModel(this);
     }
 
     @Override
-    public void onFilmsSuccess(List<MovieModel> movies) {
+    public void onFilmsSuccess(final List<MovieModel> movies) {
         getViewState().onFilmsSuccess(movies);
-
-        upcomingDatabaseModel = new UpcomingDatabaseModel(this, movies);
+        upcomingDatabaseModel.insertMoviesInDatabase(movies);
     }
 
     @Override
     public void onFilmsError() {
-        upcomingDatabaseModel = new UpcomingDatabaseModel(this);
+        upcomingDatabaseModel.getMoviesFromDatabase();
     }
 
     @Override

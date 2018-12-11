@@ -15,7 +15,7 @@ public class MovieCover {
     private int totalPages;
 
     @SerializedName("results")
-    List<MovieModel> movies;
+    private List<MovieModel> movies;
 
     public List<MovieModel> getMovies() {
         return movies;

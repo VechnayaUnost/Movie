@@ -34,5 +34,5 @@ public interface MovieModelDao {
     void delete(MovieModel movie);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(MovieModel... movieModels);
+    void insertAll(List<MovieModel> movies);
 }

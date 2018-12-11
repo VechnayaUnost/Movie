@@ -15,20 +15,20 @@ public class TrendsPresenter extends MvpPresenter<TrendsView> implements MoviesM
     private TrendsNetworksModel trendsNetworksModel;
     private TrendsDatabaseModel trendsDatabaseModel;
 
-    @Override
-    public void onFilmsSuccess(List<MovieModel> movies) {
-        getViewState().onFilmsSuccess(movies);
+    public TrendsPresenter() {
+        trendsNetworksModel = new TrendsNetworksModel(this);
+        trendsDatabaseModel = new TrendsDatabaseModel(this);
+    }
 
-        trendsDatabaseModel = new TrendsDatabaseModel(this, movies);
+    @Override
+    public void onFilmsSuccess(final List<MovieModel> movies) {
+        getViewState().onFilmsSuccess(movies);
+        trendsDatabaseModel.insertMoviesInDatabase(movies);
     }
 
     @Override
     public void onFilmsError() {
-        trendsDatabaseModel = new TrendsDatabaseModel(this);
-    }
-
-    public TrendsPresenter() {
-        trendsNetworksModel = new TrendsNetworksModel(this);
+        trendsDatabaseModel.getMoviesFromDatabase();
     }
 
     @Override
