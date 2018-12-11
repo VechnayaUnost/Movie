@@ -12,23 +12,23 @@ import java.util.List;
 @InjectViewState
 public class TrendsPresenter extends MvpPresenter<TrendsView> implements MoviesModelCallback {
 
-    private TrendsNetworksModel trendsNetworksModel;
-    private TrendsDatabaseModel trendsDatabaseModel;
+    private final TrendsNetworksModel trendsNetworksModel;
+    private final TrendsDatabaseModel trendsDatabaseModel;
+
+    public TrendsPresenter() {
+        trendsNetworksModel = new TrendsNetworksModel(this);
+        trendsDatabaseModel = new TrendsDatabaseModel(this);
+    }
 
     @Override
-    public void onFilmsSuccess(List<MovieModel> movies) {
+    public void onFilmsSuccess(final List<MovieModel> movies) {
         getViewState().onFilmsSuccess(movies);
-
-        trendsDatabaseModel = new TrendsDatabaseModel(this, movies);
+        trendsDatabaseModel.insertMoviesInDatabase(movies);
     }
 
     @Override
     public void onFilmsError() {
-        trendsDatabaseModel = new TrendsDatabaseModel(this);
-    }
-
-    public TrendsPresenter() {
-        trendsNetworksModel = new TrendsNetworksModel(this);
+        trendsDatabaseModel.getMoviesFromDatabase();
     }
 
     @Override

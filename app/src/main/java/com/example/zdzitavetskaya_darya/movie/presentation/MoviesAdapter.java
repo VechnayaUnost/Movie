@@ -21,27 +21,27 @@ import butterknife.ButterKnife;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
-    private List<MovieModel> movies;
+    private final List<MovieModel> movies;
 
     public List<MovieModel> getMovies() {
         return movies;
     }
 
-    MoviesAdapter(List<MovieModel> movies) {
+    MoviesAdapter(final List<MovieModel> movies) {
         this.movies = movies;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
+        final View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_item, parent, false);
 
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        MovieModel movie = movies.get(position);
+        final MovieModel movie = movies.get(position);
 
         holder.title.setText(movie.getTitle());
 
@@ -74,7 +74,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         @BindView(R.id.movie_release_date)
         TextView releaseDate;
 
-        ViewHolder(View itemView) {
+        ViewHolder(final View itemView) {
             super(itemView);
 
             ButterKnife.bind(this, itemView);

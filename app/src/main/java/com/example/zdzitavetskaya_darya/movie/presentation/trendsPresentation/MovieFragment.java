@@ -23,7 +23,7 @@ public class MovieFragment extends BaseFragment implements TrendsView {
     RecyclerView recyclerView;
 
     @Override
-    public void onFilmsSuccess(List<MovieModel> movies) {
+    public void onFilmsSuccess(final List<MovieModel> movies) {
         ((MoviesAdapter) recyclerView.getAdapter()).getMovies().addAll(movies);
         recyclerView.getAdapter().notifyDataSetChanged();
     }

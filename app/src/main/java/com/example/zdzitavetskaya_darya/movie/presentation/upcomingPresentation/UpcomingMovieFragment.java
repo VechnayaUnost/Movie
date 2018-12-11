@@ -23,7 +23,7 @@ public class UpcomingMovieFragment extends BaseFragment implements UpcomingView 
     RecyclerView recyclerView;
 
     @Override
-    public void onFilmsSuccess(List<MovieModel> movies) {
+    public void onFilmsSuccess(final List<MovieModel> movies) {
         ((MoviesAdapter) recyclerView.getAdapter()).getMovies().addAll(movies);
         recyclerView.getAdapter().notifyDataSetChanged();
     }

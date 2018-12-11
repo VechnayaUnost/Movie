@@ -14,10 +14,10 @@ public class RetrofitClient {
 
     private static Retrofit retrofit = null;
 
-    private static HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(message ->
+    private static final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(message ->
             Log.e("OK_HTTP",message));
 
-    private static OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+    private static final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
 
     public static Retrofit getRetrofitInstance() {
 

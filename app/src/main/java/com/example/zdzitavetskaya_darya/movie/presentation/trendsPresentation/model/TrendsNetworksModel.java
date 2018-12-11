@@ -27,20 +27,20 @@ public final class TrendsNetworksModel extends BaseMVPModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<MovieCover>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(final Disposable d) {
                         compositeDisposable.add(d);
                     }
 
                     @Override
-                    public void onSuccess(MovieCover movieCover) {
-                        for (MovieModel movie: movieCover.getMovies()) {
+                    public void onSuccess(final MovieCover movieCover) {
+                        for (final MovieModel movie: movieCover.getMovies()) {
                             movie.setTrending(true);
                         }
                         callback.onFilmsSuccess(movieCover.getMovies());
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(final Throwable e) {
                         callback.onFilmsError();
                         e.printStackTrace();
                     }

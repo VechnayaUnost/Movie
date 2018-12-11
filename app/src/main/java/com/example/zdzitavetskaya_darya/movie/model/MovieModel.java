@@ -58,7 +58,7 @@ public class MovieModel {
         return voteCount;
     }
 
-    public void setVoteCount(int voteCount) {
+    public void setVoteCount(final int voteCount) {
         this.voteCount = voteCount;
     }
 
@@ -66,7 +66,7 @@ public class MovieModel {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -74,7 +74,7 @@ public class MovieModel {
         return video;
     }
 
-    public void setVideo(boolean video) {
+    public void setVideo(final boolean video) {
         this.video = video;
     }
 
@@ -82,7 +82,7 @@ public class MovieModel {
         return voteAverage;
     }
 
-    public void setVoteAverage(float voteAverage) {
+    public void setVoteAverage(final float voteAverage) {
         this.voteAverage = voteAverage;
     }
 
@@ -90,7 +90,7 @@ public class MovieModel {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         this.title = title;
     }
 
@@ -98,7 +98,7 @@ public class MovieModel {
         return popularity;
     }
 
-    public void setPopularity(float popularity) {
+    public void setPopularity(final float popularity) {
         this.popularity = popularity;
     }
 
@@ -106,7 +106,7 @@ public class MovieModel {
         return posterPath;
     }
 
-    public void setPosterPath(String posterPath) {
+    public void setPosterPath(final String posterPath) {
         this.posterPath = posterPath;
     }
 
@@ -114,7 +114,7 @@ public class MovieModel {
         return originalLanguage;
     }
 
-    public void setOriginalLanguage(String originalLanguage) {
+    public void setOriginalLanguage(final String originalLanguage) {
         this.originalLanguage = originalLanguage;
     }
 
@@ -122,7 +122,7 @@ public class MovieModel {
         return originalTitle;
     }
 
-    public void setOriginalTitle(String originalTitle) {
+    public void setOriginalTitle(final String originalTitle) {
         this.originalTitle = originalTitle;
     }
 
@@ -130,7 +130,7 @@ public class MovieModel {
         return backdropPath;
     }
 
-    public void setBackdropPath(String backdropPath) {
+    public void setBackdropPath(final String backdropPath) {
         this.backdropPath = backdropPath;
     }
 
@@ -138,7 +138,7 @@ public class MovieModel {
         return adult;
     }
 
-    public void setAdult(boolean adult) {
+    public void setAdult(final boolean adult) {
         this.adult = adult;
     }
 
@@ -146,7 +146,7 @@ public class MovieModel {
         return overview;
     }
 
-    public void setOverview(String overview) {
+    public void setOverview(final String overview) {
         this.overview = overview;
     }
 
@@ -154,7 +154,7 @@ public class MovieModel {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
+    public void setReleaseDate(final String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
@@ -162,7 +162,7 @@ public class MovieModel {
         return isTrending;
     }
 
-    public void setTrending(boolean trending) {
+    public void setTrending(final boolean trending) {
         isTrending = trending;
     }
 
@@ -170,7 +170,7 @@ public class MovieModel {
         return isUpcoming;
     }
 
-    public void setUpcoming(boolean upcoming) {
+    public void setUpcoming(final boolean upcoming) {
         isUpcoming = upcoming;
     }
 
@@ -178,7 +178,7 @@ public class MovieModel {
         return isFavourite;
     }
 
-    public void setFavourite(boolean favourite) {
+    public void setFavourite(final boolean favourite) {
         isFavourite = favourite;
     }
 }

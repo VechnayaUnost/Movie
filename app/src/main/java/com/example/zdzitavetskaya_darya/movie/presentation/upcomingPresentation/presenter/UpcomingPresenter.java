@@ -12,23 +12,23 @@ import java.util.List;
 @InjectViewState
 public class UpcomingPresenter extends MvpPresenter<UpcomingView> implements MoviesModelCallback{
 
-    private UpcomingDatabaseModel upcomingDatabaseModel;
-    private UpcomingNetworkModel upcomingNetworkModel;
+    private final UpcomingDatabaseModel upcomingDatabaseModel;
+    private final UpcomingNetworkModel upcomingNetworkModel;
 
     public UpcomingPresenter() {
         upcomingNetworkModel = new UpcomingNetworkModel(this);
+        upcomingDatabaseModel = new UpcomingDatabaseModel(this);
     }
 
     @Override
-    public void onFilmsSuccess(List<MovieModel> movies) {
+    public void onFilmsSuccess(final List<MovieModel> movies) {
         getViewState().onFilmsSuccess(movies);
-
-        upcomingDatabaseModel = new UpcomingDatabaseModel(this, movies);
+        upcomingDatabaseModel.insertMoviesInDatabase(movies);
     }
 
     @Override
     public void onFilmsError() {
-        upcomingDatabaseModel = new UpcomingDatabaseModel(this);
+        upcomingDatabaseModel.getMoviesFromDatabase();
     }
 
     @Override

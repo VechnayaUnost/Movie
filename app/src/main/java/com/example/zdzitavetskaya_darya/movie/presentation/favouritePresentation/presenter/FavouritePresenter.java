@@ -12,14 +12,14 @@ import java.util.List;
 @InjectViewState
 public class FavouritePresenter extends MvpPresenter<FavouriteView> implements MoviesModelCallback, FavouriteModelCallback {
 
-    private FavouriteModel favouriteModel;
+    private final FavouriteModel favouriteModel;
 
     public FavouritePresenter() {
         favouriteModel = new FavouriteModel(this);
     }
 
     @Override
-    public void onFilmsSuccess(List<MovieModel> movies) {
+    public void onFilmsSuccess(final List<MovieModel> movies) {
         getViewState().onFilmsSuccess(movies);
     }
 
@@ -29,7 +29,7 @@ public class FavouritePresenter extends MvpPresenter<FavouriteView> implements M
     }
 
     @Override
-    public void onFilmSuccess(MovieModel movie) {
+    public void onFilmSuccess(final MovieModel movie) {
         getViewState().onFilmSuccess(movie);
         //insert movie in DB
     }
