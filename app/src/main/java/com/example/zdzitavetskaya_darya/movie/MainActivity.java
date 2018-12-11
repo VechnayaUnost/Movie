@@ -3,6 +3,8 @@ package com.example.zdzitavetskaya_darya.movie;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 
 import com.example.zdzitavetskaya_darya.movie.constants.ScreenConstants;
 import com.example.zdzitavetskaya_darya.movie.navigation.MainNavigator;
@@ -14,6 +16,9 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.navigation)
     BottomNavigationView bottomNavigationView;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private MainNavigator navigator;
 
@@ -27,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
@@ -42,5 +49,11 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar, menu);
+        return true;
     }
 }
